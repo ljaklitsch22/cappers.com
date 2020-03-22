@@ -1,12 +1,11 @@
-import React, {Component} from 'react';
-import { render } from '@testing-library/react';
+import React, { Component } from 'react';
 
-export default class TodosList extends Component{
-    render(){
-        return(
-            <div>
-                <p>Welcome to TodosList</p>
-            </div>
-        )
-    }
+export default class TodosList extends Component {
+	render() {
+		return (
+			<div>
+				<p>Welcome to TodosList</p>
+			</div>
+		);
+	}
 }
