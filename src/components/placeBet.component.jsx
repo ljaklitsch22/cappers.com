@@ -48,8 +48,8 @@ class PlaceBet extends Component {
 						<input
 							type="text"
 							className="form-control"
-							value={this.state.todo_description}
-							onChange={this.onChangeTodoDesc}
+							value={this.state.wagerSize}
+							onChange={this.onChangeWagerSize}
 						/>
 					</div>
 
@@ -58,8 +58,8 @@ class PlaceBet extends Component {
 						<input
 							type="text"
 							className="form-control"
-							value={this.state.todo_responsible}
-							onChange={this.onChangeTodoResp}
+							value={this.state.spread}
+							onChange={this.onChangeSpread}
 						/>
 					</div>
 

@@ -11,7 +11,39 @@ import PlaceBet from './components/placeBet.component';
 import logo from './logo.jpeg';
 
 class App extends Component {
+	state = {
+		users: [],
+		user: {
+			username: 'UserName',
+			email: 'email',
+			password: 'password'
+		}
+	};
+
+	componentDidMount() {
+		this.getUsers();
+	}
+
+	getUsers = (_) => {
+		fetch('http://localhost:4000/cappers')
+			.then((response) => response.json())
+			.then((response) => this.setState({ users: response.data }))
+			.catch((err) => console.error(err));
+	};
+
+	addUser = (_) => {
+		const { user } = this.state;
+		fetch(
+			`http://localhost:4000/cappers/add?username=${user.username}&email=${user.email}&password=${user.password}`
+		)
+			.then(this.getUsers)
+			.catch((err) => console.error(err));
+	};
+
+	renderProduct = ({ username, email, password }) => <div key={email}>{username}</div>;
+
 	render() {
+		const { users, user } = this.state;
 		return (
 			<Router>
 				<div className="container">
@@ -44,6 +76,24 @@ class App extends Component {
 							</ul>
 						</div>
 					</nav>
+
+					{users.map(this.renderProduct)}
+
+					<div>
+						<input
+							value={user.username}
+							onChange={(e) => this.setState({ user: { ...user, username: e.target.value } })}
+						/>
+						<input
+							value={user.email}
+							onChange={(e) => this.setState({ user: { ...user, email: e.target.value } })}
+						/>
+						<input
+							value={user.password}
+							onChange={(e) => this.setState({ user: { ...user, password: e.target.value } })}
+						/>
+						<button onClick={this.addUser}>Add User</button>
+					</div>
 
 					<Route path="/" exact component={TodosList} />
 					<Route path="/edit/:id" component={EditTodo} />
